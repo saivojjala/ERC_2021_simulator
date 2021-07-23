@@ -1,0 +1,9 @@
+fiducial_msgs/FiducialTransform transform
+int32 fiducial_id  
+geometry_msgs/Transform transform
+ 
+---
+
+fiducial_msgs/FiducialTransform transform
+int32 fiducial_id  
+geometry_msgs/Transform transform
