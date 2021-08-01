@@ -375,6 +375,39 @@
       </collision>
     </link>
 
+
+    <!-- <joint name="${prefix}missing_joint" type="fixed">
+      <parent link="${prefix}ee_link" />
+      <child link = "${prefix}missing_link" />
+      <origin xyz="0.02 0.0119 0.0" rpy="0.0 0.0 ${pi/2.0}" />
+    </joint>
+
+    <link name="${prefix}missing_link">
+      <collision>
+        <geometry>
+          <box size="0.03 0.03 0.05"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.01 0 0"/>
+      </collision>
+      <visual>
+      <material name="Grey">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+        <geometry>
+          <box size="0.03 0.03 0.05"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.01 0 0"/>
+      </visual>
+      <inertial>
+      <mass value="0.15"/>
+      <inertia
+          ixx="0.00000425" ixy="0" ixz="0"
+          iyy="0.00000425" iyz="0"
+          izz="0.00000225" />
+      </inertial>
+    </link> -->
+
+
     <xacro:ur_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
     <xacro:ur_arm_gazebo prefix="${prefix}" />
 
@@ -393,6 +426,39 @@
       <parent link="${prefix}wrist_3_link"/>
       <child link="${prefix}tool0"/>
     </joint>
+
+      <!-- Right Panel Shortened -->
+      <link name="right_panel_box">
+        <collision>
+          <geometry>
+            <box size="0.02 0.3 0.2"/>
+          </geometry>
+        </collision>
+
+        <visual>
+          <geometry>
+            <box size="0.02 0.3 0.2"/>
+          </geometry>
+          <material name="White">
+            <color rgba="1 1 1 1"/>
+        </material>
+        </visual>
+
+        <inertial>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <mass value="1"/>
+          <inertia
+            ixx="0.004" ixy="0" ixz="0"
+            iyy="0.004" iyz="0"
+            izz="0.004"/>
+        </inertial>
+      </link>
+
+      <joint name="right_panel_joint" type="fixed">
+        <origin xyz="0.4265 -0.2672 0.13" rpy="0 0 -0.3556"/>
+        <parent link="world"/>
+        <child link="right_panel_box"/>
+      </joint>
 
         <!-- INSPECTION WINDOW-->
     <link name="inspection_window">
@@ -415,7 +481,7 @@
     <joint name="inspection_window_joint" type="fixed">
       <parent link="right_panel_box"/>
       <child link="inspection_window"/>
-      <origin xyz="-0.075 0.0 -0.15" rpy="1.5707 0.0 1.5707"/>
+      <origin xyz="-0.075 -0.05 0.04" rpy="1.5707 0.0 1.5707"/>
     </joint>
 
     <!-- INSPECTION WINDOW COVER-->
@@ -485,7 +551,7 @@
     <xacro:boxes prefix="stand" x="0.0" y="0" z="-0.05" ox="0" oy="0" oz="0" width="0.15" height="0.15" depth="0.1" color="Grey" type="fixed"/>
     <xacro:boxes prefix="center_panel" x="0.47" y="0" z="0.27" ox="0" oy="0" oz="0" width="0.02" height="0.3" depth="0.5" color="White" type="fixed"/>
     <xacro:boxes prefix="left_panel" x="0.4265" y="0.2672" z="0.27" ox="0" oy="0" oz="0.3556" width="0.02" height="0.3" depth="0.5" color="White" type="fixed"/>
-    <xacro:boxes prefix="right_panel" x="0.4265" y="-0.2672" z="0.27" ox="0" oy="0" oz="-0.3556" width="0.02" height="0.3" depth="0.5" color="White" type="fixed"/>
+    <!-- <xacro:boxes prefix="right_panel" x="0.4265" y="-0.2672" z="0.27" ox="0" oy="0" oz="-0.3556" width="0.02" height="0.3" depth="0.3" color="White" type="fixed"/> -->
     <xacro:boxes prefix="IMU_module" x="0.21" y="0.2672" z="-0.075" ox="0" oy="0" oz="0.0" width="0.06" height="0.160" depth="0.05" color="Grey" type="fixed"/>
     <!-- BOX definition -->
 
@@ -601,8 +667,8 @@
 		
     <!-- Center Row -->
     <xacro:aruco_tag prefix="04" name="aruco_04.dae" parent_link="world" x="0.4588" y="0.09" z="0.295" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
-    <xacro:aruco_tag prefix="05" name="aruco_05.dae" parent_link="world" x="0.4588" y="-0.09" z="0.295" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
-    <xacro:aruco_tag prefix="06" name="aruco_06.dae" parent_link="world" x="0.4588" y="0" z="0.295" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
+    <xacro:aruco_tag prefix="05" name="aruco_05.dae" parent_link="world" x="0.4588" y="0" z="0.295" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
+    <xacro:aruco_tag prefix="06" name="aruco_06.dae" parent_link="world" x="0.4588" y="-0.09" z="0.295" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
 		
     <!-- Bottom Row -->
     <xacro:aruco_tag prefix="07" name="aruco_07.dae" parent_link="world" x="0.4588" y="0.09" z="0.145" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
@@ -611,7 +677,7 @@
 
      
     <xacro:aruco_tag prefix="10" name="aruco_10.dae" parent_link="IMU_module_box" x="0.0" y="0.00" z="0.0262" ox="0" oy="0" oz="1.5707" size="0.04" type="fixed"/> 
-    <xacro:aruco_tag prefix="11" name="aruco_11.dae" parent_link="left_panel_box" x="-0.01" y="0.00" z="0.0" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
+    <xacro:aruco_tag prefix="11" name="aruco_11.dae" parent_link="left_panel_box" x="-0.01" y="0.08" z="0.18" ox="-1.5707" oy="0.0" oz="1.5707" size="0.05" type="fixed"/>
     <xacro:aruco_tag prefix="12" name="aruco_12.dae" parent_link="inspection_window" x="0.0" y="0.03" z="-0.046" ox="-3.141" oy="0.0" oz="0.0" size="0.04" type="fixed"/>
     <xacro:aruco_tag prefix="13" name="aruco_13.dae" parent_link="inspection_window_cover" x="0.04" y="0.002" z="-0.02" ox="-1.5707" oy="0" oz="0" size="0.05" type="fixed"/>
     <xacro:aruco_tag prefix="14" name="aruco_14.dae" parent_link="world" x="0.15" y="-0.30" z="-0.095" ox="0" oy="0" oz="0" size="0.05" type="fixed"/>
