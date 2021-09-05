@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-	<node pkg="simulation" type="final_3.py" name="final_3" output="screen"/>
-</launch>
