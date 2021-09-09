@@ -14,12 +14,8 @@ from geometry_msgs.msg import Transform
 def main():
 
     moveit_commander.roscpp_initialize(sys.argv)
-    robot = moveit_commander.RobotCommander()
-    scene = moveit_commander.PlanningSceneInterface()
-
+    
     manipulator_group = moveit_commander.MoveGroupCommander("manipulator")
-    gripper_group = moveit_commander.MoveGroupCommander("gripper")
-    reference_frame = 'base_link'
     manipulator_group.set_pose_reference_frame('base_link')
 
     # Set the allowable error of position (unit: meter) and attitude (unit: radians)
@@ -58,12 +54,27 @@ def main():
     (plan, fraction) = manipulator_group.compute_cartesian_path (waypoints, 0.01,0.0,True) 
     manipulator_group.execute(plan)
 
-    waypoints=[]
-    wpose.orientation.w = -0.331305
-    wpose.orientation.x = -0.498117
-    wpose.orientation.y = -0.493528
-    wpose.orientation.z = 0.631306
-    waypoints.append(deepcopy(wpose))
+    # waypoints=[]
+    # wpose.orientation.w = -0.331305
+    # wpose.orientation.x = -0.498117
+    # wpose.orientation.y = -0.493528
+    # wpose.orientation.z = 0.631306
+    # waypoints.append(deepcopy(wpose))
+
+    # (plan, fraction) = manipulator_group.compute_cartesian_path (waypoints, 0.01,0.0,True) 
+    # manipulator_group.execute(plan)
+
+    joint_target = manipulator_group.get_current_joint_values()
+    joint_target[0] = 2.68781
+    joint_target[1] = -2.0245
+    joint_target[2] = -0.6806
+    joint_target[3] = -2.28638
+    joint_target[4] = 1.518
+    joint_target[5] = 1.4311
+    manipulator_group.set_joint_value_target(joint_target)
+
+    plan = manipulator_group.plan()
+    manipulator_group.go(wait=True)
 
     waypoints=[]
     wpose.position.x += 0.02256
@@ -85,17 +96,19 @@ def main():
     wpose.position.z -= 0.0296 
     waypoints.append(deepcopy(wpose))
 
-    waypoints=[]
-    wpose.orientation.w = -0.298484
-    wpose.orientation.x = -0.472045
-    wpose.orientation.y = -0.518511
-    wpose.orientation.z = 0.647478
-    waypoints.append(deepcopy(wpose))
+    group_variable_values = manipulator_group.get_current_joint_values()
+    group_variable_values[0] = 2.6878
+    group_variable_values[1] = -2.14675
+    group_variable_values[2] = -0.5235
+    group_variable_values[3] = -2.426
+    group_variable_values[4] = 1.5009
+    group_variable_values[5] = 1.44862
+    manipulator_group.set_joint_value_target(group_variable_values)
 
-    (plan, fraction) = manipulator_group.compute_cartesian_path (waypoints, 0.01,0.0,True) 
-    manipulator_group.execute(plan)
+    plan = manipulator_group.plan()
+    manipulator_group.go(wait=True)
 
-    #------SCAN------ 
+    # #------SCAN------ 
     sub = rospy.wait_for_message("fiducial_transforms", FiducialTransformArray)
     tag_id = save_id(sub)
     print(tag_id)

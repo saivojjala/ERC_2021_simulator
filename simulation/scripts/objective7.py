@@ -48,20 +48,15 @@ def main():
     
     #initialize pushing pos
     
-    pose_target = geometry_msgs.msg.Pose()
-    pose_target.orientation.w = 0.703414
-    pose_target.orientation.x = 0.710745
-    pose_target.orientation.y = 0.00503872
-    pose_target.orientation.z = -0.00497318
-    pose_target.position.x = float(rows[5][0])+(-0.187)
-    pose_target.position.y = float(rows[5][1])+(0.00936)
-    pose_target.position.z = float(rows[5][2])+(-0.05349)
-
-    manipulator_group.set_pose_target(pose_target)
-    plan = manipulator_group.plan()
-    manipulator_group.go()
-    manipulator_group.stop()
-
+    start_pose = manipulator_group.get_current_pose().pose
+    waypoints=[]
+    wpose = deepcopy(start_pose)
+    wpose.position.x += float(rows[5][0])-0.158534-0.187
+    wpose.position.y += float(rows[5][1])-0.113315+0.0093
+    wpose.position.z += float(rows[5][2])-0.354882-0.053
+    waypoints.append(deepcopy(wpose))
+    (plan, fraction) = manipulator_group.compute_cartesian_path (waypoints, 0.01,0.0,True) 
+    manipulator_group.execute(plan)
 
     #CLOSE THE GRIPPER
     gripper_group_variable_values = gripper_group.get_current_joint_values()

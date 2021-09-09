@@ -52,14 +52,20 @@ def main():
     wpose.position.x -= -0.0196
     waypoints.append(deepcopy(wpose))
 
-    wpose.orientation.w = 0.706815
-    wpose.orientation.x = 0.025321
-    wpose.orientation.y = 0.706875
-    wpose.orientation.z = 0.00996121
-    waypoints.append(deepcopy(wpose))
-
     (plan, fraction) = manipulator_group.compute_cartesian_path (waypoints, 0.01,0.0,True) 
     manipulator_group.execute(plan)
+
+    joint_target = manipulator_group.get_current_joint_values()
+    joint_target[0] = 0.3839
+    joint_target[1] = -1.0472
+    joint_target[2] = 0.698132
+    joint_target[3] = 1.9024
+    joint_target[4] = 1.518
+    joint_target[5] = -2.7402
+    manipulator_group.set_joint_value_target(joint_target)
+
+    plan = manipulator_group.plan()
+    manipulator_group.go(wait=True)
 
     waypoints=[]
     wpose.position.x += 0.000119
@@ -76,6 +82,17 @@ def main():
     (plan, fraction) = manipulator_group.compute_cartesian_path (waypoints, 0.01,0.0,True) 
     manipulator_group.execute(plan)
 
+    joint_target = manipulator_group.get_current_joint_values()
+    joint_target[0] = 0.4188
+    joint_target[1] = -0.9424
+    joint_target[2] = 1.4311
+    joint_target[3] = 1.06465
+    joint_target[4] = 1.518
+    joint_target[5] = -1.1344
+    manipulator_group.set_joint_value_target(joint_target)
+
+    plan = manipulator_group.plan()
+    manipulator_group.go(wait=True)
     #-----Displace to the Grasping Location
 
     init_pose = []

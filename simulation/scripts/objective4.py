@@ -37,14 +37,20 @@ def main():
     wpose.position.z += 0.18358
     waypoints.append(deepcopy(wpose))
 
-    wpose.orientation.w = 0.977568
-    wpose.orientation.x = 0.0011619
-    wpose.orientation.y = -0.00725988
-    wpose.orientation.z = 0.210491
-    waypoints.append(deepcopy(wpose))
-
     (plan, fraction) = manipulator_group.compute_cartesian_path (waypoints, 0.01,0.0,True) 
     manipulator_group.execute(plan)
+
+    joint_target = manipulator_group.get_current_joint_values()
+    joint_target[0] = 0.3316
+    joint_target[1] = -1.9373
+    joint_target[2] = 1.5
+    joint_target[3] = 0.4363
+    joint_target[4] = 1.466
+    joint_target[5] = -3.1415
+    manipulator_group.set_joint_value_target(joint_target)
+
+    plan = manipulator_group.plan()
+    manipulator_group.go(wait=True)
 
     waypoints=[]
     wpose.position.x += 0.052993
