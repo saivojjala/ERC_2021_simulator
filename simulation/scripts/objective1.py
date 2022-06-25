@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sys
 from copy import deepcopy
 import numpy as np
@@ -609,7 +609,7 @@ if __name__ == "__main__":
     dict={'tag_id':tagid,'position_x':posx,'position_y':posy,'position_z':posz}
     df=pd.DataFrame(dict)
     df.to_csv('markers.csv',index=False)
-    df.to_csv('~/catkin_ws/src/ERC_2021_simulator/simulation/scripts/markers.csv',index=False)
+    df.to_csv('~/erc_ws/src/ERC_2021_simulator/simulation/scripts/markers.csv',index=False)
     print (df)
 
 
