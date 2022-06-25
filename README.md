@@ -1,3 +1,7 @@
+**When cloning this repository, clone this as a separate ROS package named roboticsgroup_gazebo_plugins**
+
+This package is necessary while running simulations to set gripper links.
+
 roboticsgroup_gazebo_plugins
 ================
 
