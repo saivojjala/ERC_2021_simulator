@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/opt/ros/melodic/include/**",
+        "/home/saipranav/catkin_ws/devel/include/**",
+        "/home/saipranav/catkin_ws/src/roboticsgroup_gazebo_plugins/include/**",
+        "/home/saipranav/catkin_ws/src/ERC_2021_simulator/ur_kinematics/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}
