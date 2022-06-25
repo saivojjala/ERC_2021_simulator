@@ -2,6 +2,8 @@
 
 This package is necessary while running simulations to set gripper links.
 
+This package was not created by Mars Rover Manipal and is not associated to Mars Rover Manipal, it is only to be used when testing on simulation.
+
 roboticsgroup_gazebo_plugins
 ================
 
