@@ -7,7 +7,7 @@ roslaunch simulation simulator.launch
 roslaunch simulation objective1.launch
 ```
 ```
-roslaunch simulation objective2.launch
+roslaunch simulation objective2.launch sequence:="string of 4 buttons"
 ```
 ```
 roslaunch simulation objective3.launch
