@@ -52,6 +52,6 @@ Home Position:
 roslaunch simulation objective9.launch
 ```
 
-## Watch the simulation on youtube: 
-### Qualification B Submission | European Rover Challenge 2021: https://youtu.be/pOXV26B_EI0?t=84
+### Qualification B Submission | European Rover Challenge 2021: 
+https://youtu.be/pOXV26B_EI0?t=84
 
